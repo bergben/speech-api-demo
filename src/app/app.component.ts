@@ -1,15 +1,16 @@
-import { VideoContainerComponent } from './video-container/video-container.component';
-import { SpeechService } from './speech.service';
-import { Component, ViewChild, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { VideoContainerComponent } from "./video-container/video-container.component";
+import { SpeechService } from "./speech.service";
+import { Component, ViewChild, OnDestroy } from "@angular/core";
+import { Subscription } from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.sass"]
 })
 export class AppComponent implements OnDestroy {
-  @ViewChild(VideoContainerComponent, {static: false}) videoContainer: VideoContainerComponent;
+  @ViewChild(VideoContainerComponent, { static: false })
+  videoContainer: VideoContainerComponent;
   private subscriptions: Subscription[] = [];
 
   constructor(private speechService: SpeechService) {
@@ -23,10 +24,11 @@ export class AppComponent implements OnDestroy {
 
   private listenToActions() {
     this.subscriptions.push(
-        this.speechService.listen().subscribe(triggeredActions => {
-          triggeredActions.forEach(triggeredAction => this.videoContainer.triggerAction(triggeredAction));
-        })
+      this.speechService.listen().subscribe(triggeredActions => {
+        triggeredActions.forEach(triggeredAction =>
+          this.videoContainer.triggerAction(triggeredAction)
+        );
+      })
     );
   }
-
 }

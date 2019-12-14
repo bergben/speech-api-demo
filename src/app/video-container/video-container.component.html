@@ -1,4 +1,11 @@
 <p>video-container works!</p>
-<video #video loop autoplay>
-    <source src="https://media.giphy.com/media/JR6a5d3I0jxwS0CnaN/giphy.mp4" />
-</video>
+<div style="display: flex; width: 100%;" class="thumbnail-container">
+    <div class="thumbnail" *ngFor="let source of sources; index as i">
+      <video width="100" height="100" [src]="source" [ngStyle]="{'border': i == activeSource ? '2px solid red' : 'none'}"></video>
+    </div>
+</div>
+<div style="width: 100%">
+  <video muted #video loop autoplay [src]="sources[activeSource]" [playbackRate]="playbackRate">
+      <!-- <source [src]="sources[activeSource]" /> -->
+  </video>
+</div>
