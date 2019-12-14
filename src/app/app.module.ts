@@ -1,16 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { RxSpeechRecognitionService, SpeechRecognitionModule } from '@kamiazya/ngx-speech-recognition';
 import { AppComponent } from './app.component';
+import { VideoContainerComponent } from './video-container/video-container.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VideoContainerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    SpeechRecognitionModule.withConfig({
+      lang: 'de-de',
+      continuous: true,
+      interimResults: false,
+      maxAlternatives: 1
+    }),
   ],
-  providers: [],
+  providers: [RxSpeechRecognitionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
