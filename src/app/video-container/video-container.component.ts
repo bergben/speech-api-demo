@@ -1,20 +1,27 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { WhiteListedAction } from '../white-listed-action.enum';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { WhiteListedAction } from "../white-listed-action.enum";
 
 @Component({
-  selector: 'app-video-container',
-  templateUrl: './video-container.component.html',
-  styleUrls: ['./video-container.component.sass']
+  selector: "app-video-container",
+  templateUrl: "./video-container.component.html",
+  styleUrls: ["./video-container.component.sass"]
 })
 export class VideoContainerComponent implements OnInit {
-  @ViewChild('video', {static: false}) video: ElementRef<HTMLVideoElement>;
-  constructor() { }
+  @ViewChild("video", { static: false }) video: ElementRef<HTMLVideoElement>;
+  sources = [
+    "https://media.giphy.com/media/JR6a5d3I0jxwS0CnaN/giphy.mp4",
+    "https://media.giphy.com/media/q6RoNkLlFNjaw/giphy.mp4",
+    "https://media.giphy.com/media/lJNoBCvQYp7nq/giphy.mp4"
+  ];
+  activeSource = 0;
+  playbackRate = 1;
 
-  ngOnInit() {
-  }
+  constructor() {}
+
+  ngOnInit() {}
 
   get videoElement() {
-     return this.video.nativeElement;
+    return this.video.nativeElement;
   }
 
   triggerAction(action: WhiteListedAction) {
@@ -39,6 +46,9 @@ export class VideoContainerComponent implements OnInit {
         break;
       case WhiteListedAction.start:
         break;
+      case WhiteListedAction.stopp:
+        this.pause();
+        break;
       case WhiteListedAction.beenden:
         break;
     }
@@ -46,22 +56,41 @@ export class VideoContainerComponent implements OnInit {
 
   private pause() {
     this.videoElement.pause();
-    console.log('paused');
+    console.log("paused");
   }
   private play() {
     this.videoElement.play();
-    console.log('play');
+    console.log("play");
   }
   private nextVideo() {
-    console.log('nextVideo');
+    if (this.activeSource === this.sources.length - 1) {
+      this.activeSource = 0;
+    } else {
+      this.activeSource++;
+    }
+    console.log("nextVideo");
   }
   private previousVideo() {
-    console.log('previousVideo');
+    if (this.activeSource === 0) {
+      this.activeSource = this.sources.length - 1;
+    } else {
+      this.activeSource--;
+    }
+    console.log("previousVideo");
   }
+
   private increasePlaybackSpeed() {
-    console.log('increasePlaybackSpeed');
+    this.playbackRate = this.playbackRate + 0.2;
+    console.log("increasePlaybackSpeed");
   }
+
   private decreasePlaybackSpeed() {
-    console.log('decreasePlaybackSpeed');
+    this.playbackRate = this.playbackRate - 0.2;
+    console.log("decreasePlaybackSpeed");
+  }
+
+  private normalPlaybackSpeed() {
+    this.playbackRate = 1;
+    console.log("decreasePlaybackSpeed");
   }
 }
