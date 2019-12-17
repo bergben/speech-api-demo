@@ -9,9 +9,10 @@ import { WhiteListedAction } from "../white-listed-action.enum";
 export class VideoContainerComponent implements OnInit {
   @ViewChild("video", { static: false }) video: ElementRef<HTMLVideoElement>;
   sources = [
-    "https://media.giphy.com/media/JR6a5d3I0jxwS0CnaN/giphy.mp4",
-    "https://media.giphy.com/media/q6RoNkLlFNjaw/giphy.mp4",
-    "https://media.giphy.com/media/lJNoBCvQYp7nq/giphy.mp4"
+    "assets/videos/schulung_step1_x264.mp4",
+    "assets/videos/schulung_step2_x264.mp4",
+    "assets/videos/schulung_step3_x264.mp4",
+    "assets/videos/schulung_step4_x264.mp4"
   ];
   activeSource = 0;
   playbackRate = 1;
