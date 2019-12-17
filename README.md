@@ -5,6 +5,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Run
 
+**Only Chrome Browser is supported!**
+
 - Clone repo `git clone ...`
 - run `"docker-compose up"` in CLI
 - open [https://0.0.0.0:4200/](https://0.0.0.0:4200/)
